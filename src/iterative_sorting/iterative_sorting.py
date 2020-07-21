@@ -84,6 +84,23 @@ What is the time and space complexity of the counting sort algorithm?
 
 # Time complexity: O(n+k)
 def counting_sort(arr, maximum=None):
-    # Your code here
+    if maximum is None:
+        maximum = 0
+        for i in range(len(arr)):
+            if arr[i] < 0:
+                return -1
+            if arr[i] > maximum:
+                maximum = arr[i]
+    buckets = [arr.count(i) for i in range(maximum + 1)]
+
+    arr.clear()
+    for i in range(len(buckets)):
+        for j in range(buckets[i]):
+            arr.append(i)
 
     return arr
+
+
+test_array = [1, 0, 3, 1, 3, 1]
+
+print(counting_sort(test_array))
